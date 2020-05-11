@@ -1,0 +1,15 @@
+{
+  "name": "apextracker",
+  "version": "1.0.0",
+  "description": "Apex stats tracker desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Tyler Smith",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^8.2.5",
+    "knex": "^0.21.1"
+  }
+}

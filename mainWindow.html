@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://allfont.net/allfont.css?fonts=agency-fb-bold" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="./styles/apex-styles.css">
+        <title>Apex Stat Tracker</title>
+    </head>
+    <body>
+            <form class="form">
+                <fieldset>
+                    <div>
+                        <legend>MATCH DATA</legend>
+                        <label>LEGEND PLAYED</label>
+                        <br/>
+                            <div class="centerDiv teko-font">
+                                <div class="grid-container">
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="bloodhound">
+                                        <label for="bloodhound"> 
+                                            <div class='styled-radio' id="bloodhound"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="gibraltar">
+                                        <label for="gibraltar"> 
+                                            <div class="styled-radio" id="gibraltar"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="lifeline">
+                                        <label for="lifeline"> 
+                                            <div class="styled-radio" id="lifeline"></div>
+                                        </label>
+                                    </div>
+
+                                    <!-- SECOND ROW -->
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="pathfinder">
+                                        <label for="pathfinder"> 
+                                            <div class="styled-radio" id="pathfinder"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="wraith">
+                                        <label for="wraith"> 
+                                            <div class="styled-radio" id="wraith"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="bangalore">
+                                        <label for="bangalore"> 
+                                            <div class="styled-radio" id="bangalore"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="caustic">
+                                        <label for="caustic"> 
+                                            <div class="styled-radio" id="caustic"></div>
+                                        </label>
+                                    </div>
+
+                                    <!-- THIRD ROW -->
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="mirage">
+                                        <label for="mirage"> 
+                                            <div class="styled-radio" id="mirage"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="octane">
+                                        <label for="octane"> 
+                                            <div class="styled-radio" id="octane"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="wattson">
+                                        <label for="wattson"> 
+                                            <div class="styled-radio" id="wattson"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="crypto">
+                                        <label for="crypto"> 
+                                            <div class="styled-radio" id="crypto"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <input type="radio" name="legend" id="revenant">
+                                        <label for="revenant"> 
+                                            <div class="styled-radio" id="revenant"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <br/>
+                    <label>SEASON:</label>
+                    <input type='number' required><br/>
+
+                    <label>FINAL PLACE:</label>
+                    <input type='number' required><br/>
+
+                    <label>KILLS:</label>
+                    <input type='number' min="0" max="60" required><br/>
+
+                    <label>DAMAGE INFLICTED:</label>
+                    <input type='text' required><br/>
+
+                    <label>TIME SURVIVED:</label>
+                    <input type='text' required><br/>
+
+                    <label>REVIVES GIVEN:</label>
+                    <input type='text' required><br/>
+                    
+                    <div class="centerDiv">
+                        <input type="submit" id="submit-button" class="apex-button teko-font"" value="SUBMIT" id="submit"></input>
+                        <input type="reset" class="apex-button teko-font" value="RESET" id="reset"></input>
+                    </div>
+                    <br/>
+
+                    <p id="message" class="teko-font"></p>
+                    <p id="json-display"></p>
+                </fieldset>
+            </form>
+        </div>
+        
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+        const ul = document.querySelector('ul');
+
+        let chosenLegend;
+
+        ipcRenderer.on('item:add', function(e, item){
+            const li = document.createElement('li');
+            const itemText = document.createTextNode(item);
+            li.appendChild(itemText);
+            ul.appendChild(li);
+        });
+
+/*         document.getElementById("reset").onclick = function() {
+            document.getElementById("message").innerHTML = "Form reset!";
+        }
+
+        document.getElementById("submit").onclick = function() {
+            document.getElementById("message").innerHTML = "Data submitted!!";
+        } */
+
+        let selection = 0;
+        document.querySelectorAll(".clickLayer").forEach(item => {
+            item.addEventListener('click', event => {
+                if(selection !== 0) {
+                    selection.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+                selection = event.srcElement;
+                event.srcElement.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+                console.log("clicked!");
+            })
+        });
+
+        const handleFormSubmit = event => {
+            event.preventDefault();
+            const data = {};
+
+            const dataContainer = document.getElementById('json-display');
+            dataContainer.textContent = JSON.stringify(data, null, "  ")
+        }
+
+        const form = document.getElementById('submit-button');
+        form.addEventListener('click', handleFormSubmit);
+    </script>
+
+    </body>
+</html>
+
