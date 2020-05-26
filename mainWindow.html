@@ -124,14 +124,14 @@
                     <input class="apex-form" type='number' id="kills-input" min="0" max="60" required><br/>
 
                     <label>DAMAGE INFLICTED:</label>
-                    <input class="apex-form" type='text' id="damage-input" required><br/>
+                    <input class="apex-form" type='number' id="damage-input" min="0" required><br/>
 
                     <label>TIME SURVIVED:</label>
-                        <input class="apex-form" type='text' placeholder="MM" id="minutes-input" required>
-                        <input class="apex-form" type='text' placeholder="SS" id="seconds-input" required><br/>
+                        <input class="apex-form" type='number' placeholder="MM" id="minutes-input" min="0" max="59" required>
+                        <input class="apex-form" type='number' placeholder="SS" id="seconds-input" min="0" max="59" required><br/>
 
                     <label>REVIVES GIVEN:</label>
-                    <input class="apex-form" type='text' required><br/>
+                    <input class="apex-form" type='number' id="revives-input" min="0" required><br/>
                     
                     <div class="centerDiv">
                         <input type="submit" id="submit-button" class="apex-form apex-button teko-font"" value="SUBMIT" id="submit"></input>
@@ -165,41 +165,122 @@
             event.preventDefault();
             //true if missing required fields
             let incomplete = false;
-
+            const invalidOutline = "4px solid rgba(255, 0, 0, 0.7)";
             //iterate through radio buttons to find selected
-            let legendRadios = document.getElementsByName('legend');
+            const legendRadios = document.getElementsByName('legend');
             let legendPicked = false;
+            let legend;
             for(let i = 0; i < legendRadios.length; i++) {
                 if(legendRadios[i].checked) {
                     legendPicked = true;
                     legend = legendRadios[i].value;
                 } 
             }
-
-            if(!(legendPicked)) {
+            if(!legendPicked) {
                 incomplete = true;
+                console.log("no legend selected");
             }
+            //check season
             const seasonInput = document.getElementById("season-input");
-            if(!(seasonInput.checkValidity())) {
+            let season;
+            if(seasonInput.checkValidity()) {
+                season = seasonInput.value;
+            } else {
                 incomplete = true;
                 console.log("changing placeholder...");
-                seasonInput.style.outline = "2px solid red";
+                seasonInput.style.outline = invalidOutline;
             }
+            //check final place
+            const placeInput = document.getElementById("place-input");
+            let place;
+            if(placeInput.checkValidity()) {
+                place = placeInput.value;
+            } else {
+                incomplete = true;
+                console.log("final place invalid");
+                placeInput.style.outline = invalidOutline;
+            }
+            //check kills
+            const killsInput = document.getElementById("kills-input");
+            let kills;
+            if(killsInput.checkValidity()) {
+                kills = killsInput.value;
+            } else {
+                incomplete = true;
+                console.log("kills invalid");
+                killsInput.style.outline = invalidOutline;
+            }
+            //check damage 
+            const damageInput = document.getElementById("damage-input");
+            let damage;
+            if(damageInput.checkValidity()) {
+                damage = damageInput.value;
+            } else {
+                incomplete = true;
+                console.log("damage invalid");
+                damageInput.style.outline = invalidOutline;
+            }
+
+            //check time survived
+            const minInput = document.getElementById("minutes-input");
+            const secInput = document.getElementById("seconds-input");
+            let timeSurvived;
+            if(minInput.checkValidity() && secInput.checkValidity()) {
+                let minSurvived = minInput.value;
+                let secSurvived = secInput.value;
+                if(minInput.value.length == 1) {
+                    minSurvived = "0" + minSurvived;
+                }
+                if(secInput.value.length == 1) {
+                    secSurvived = "0" + secSurvived;
+                }
+                timeSurvived = "00:" + minSurvived + ":" + secSurvived; 
+            } 
+            if(!minInput.checkValidity()) {
+                incomplete = true;
+                console.log("minutes invalid");
+                minInput.style.outline = invalidOutline;
+            } 
+            if(!minInput.checkValidity()) {
+                incomplete = true;
+                console.log("seconds invalid");
+                secInput.style.outline = invalidOutline;
+            }
+            //check revives given
+            const revivesInput = document.getElementById("revives-input");
+            let revivesGiven;
+            if(revivesInput.checkValidity()) {
+                revivesGiven = revivesInput.value;
+            } else {
+                incomplete = true;
+                console.log("revives invalid");
+                revivesInput.style.outline = invalidOutline;
+            }
+            //evaluate if form is completed
             if(incomplete) {
                 document.getElementById('json-display').style.fontSize = "80%";
                 document.getElementById('json-display').innerHTML = "Form Incomplete...";
                 return;
+            } else {
+                console.log("form submitting...");
+                //create json to be submitted
+                let formData = {
+                    "legend":legend,
+                    "season":Number(season),
+                    "final-place":Number(place),
+                    "kills":Number(kills),
+                    "damage":Number(damage),
+                    "time-survived":timeSurvived,
+                    "revives-given":Number(revivesGiven)
+                }
+                document.getElementById('json-display').innerHTML = JSON.stringify(formData);
+                createDB();
+                addRow(formData);
             }
-            console.log("form submitting...");
             
-            let formData = {
-                "legend":legend,
-                "season":season
-            }
-            document.getElementById('json-display').innerHTML = JSON.stringify(formData);
         });
     </script>
-
+    <script src="dbManage.js"></script>
     </body>
 </html>
 

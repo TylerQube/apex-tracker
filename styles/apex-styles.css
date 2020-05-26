@@ -95,6 +95,7 @@ input[type=text], input[type=number] {
     padding:5px;
     position:relative;
     bottom:3px;
+    transition-duration:0.2s;
 }
 
 input[type=radio] {

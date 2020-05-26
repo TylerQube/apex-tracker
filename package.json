@@ -4,12 +4,17 @@
   "description": "Apex stats tracker desktop app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "install-app-deps"
   },
   "author": "Tyler Smith",
   "license": "MIT",
   "dependencies": {
     "electron": "^8.2.5",
-    "knex": "^0.21.1"
+    "knex": "^0.21.1",
+    "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^22.6.1"
   }
 }
