@@ -1,4 +1,3 @@
-const electron = require('electron');
 const { dialog } = require('electron').remote;
 const {ipcRenderer} = electron;
 
@@ -129,7 +128,8 @@ submitButton.addEventListener('click', function(event) {
         document.getElementById('json-display').innerHTML = JSON.stringify(formData);
         createDB();
         addRow(formData);
-        resetForm();    
+        getTable();
+        resetForm();   
     }
     
 });
@@ -137,6 +137,8 @@ submitButton.addEventListener('click', function(event) {
 function resetForm() {
     document.getElementById('apex-form-header').reset();
     const inputs = document.getElementsByTagName('input');
+    document.getElementById('json-display').style.fontSize = "80%";
+    document.getElementById('json-display').innerHTML = "Form Reset!";
     for(let i = 0; i < inputs.length; i++) {
         if(inputs[i].type == "text" || inputs[i].type == "number") {
             inputs[i].style.outlineWidth = "0px";

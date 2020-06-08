@@ -14,8 +14,11 @@ app.on('ready', function() {
         webPreferences: {
             nodeIntegration: true
         },
-        width:750,
-        height:1600
+        width:600,
+        height:1600,
+        minWidth:600,
+        frame: false,
+        icon: __dirname + '/images/app_icon_64.png',
     });
     // Load html file into window
     mainWindow.loadURL(url.format({
@@ -34,34 +37,22 @@ app.on('ready', function() {
     Menu.setApplicationMenu(mainMenu);
 });
 
-// Handle create add window
-function createAddWindow(){
-    // Create new window
-    addWindow = new BrowserWindow({
-        webPreferences: {
-            nodeIntegration: true
-        },
-        width: 300,
-        height: 500,
-        title:'View Stats'
-    });
-    // Load html file into window
-    addWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'addWindow.html'),
-        protocol:'file:',
-        slashes: true
-    }));
-    // Garbage collection handle
-    addWindow.on('close', function(){
-        addWindow = null;
-    })
-}
 
-// Catch item:add send
-ipcMain.on('item:add', function(e, item){
-    console.log(item);
-    mainWindow.webContents.send('item:add', item);
-    addWindow.close();
+// Use window buttons
+ipcMain.on('toggleMax', function(e){
+    if(!mainWindow.isMaximized()) {
+        mainWindow.maximize()
+    } else {
+        mainWindow.unmaximize()
+    }
+});
+
+ipcMain.on('minimize', function(e) {
+    mainWindow.minimize()
+})
+
+ipcMain.on('close', function(e){
+    mainWindow.close()
 });
 
 // Create menu template
