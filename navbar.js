@@ -1,4 +1,3 @@
-const electron = require('electron')
 const ipc = electron.ipcRenderer
 const remote = electron.remote
 var win = remote.BrowserWindow.getFocusedWindow()
@@ -6,6 +5,13 @@ const url = require('url');
 const path = require('path');
 
 const menuMin = document.getElementById('nav-min')
+
+const dataPage = document.getElementById('data-page')
+const formPage = document.getElementById('form-page')
+
+dataPage.style.display = "none"
+
+const pages = [formPage, dataPage]
 
 //handles navigation bar highlighting
 document.querySelectorAll('.nav-button').forEach(item => {
@@ -18,17 +24,16 @@ document.querySelectorAll('.nav-button').forEach(item => {
             }
         }
         if(item.id == 'nav-form') {
-            win.loadURL(url.format({
-                pathname: path.join(__dirname, 'mainWindow.html'),
-                protocol:'file:',
-                slashes: true
-            }));
+            for(let i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none"
+            }
+            formPage.style.display = "block"
         } else if(item.id == 'nav-data') {
-            win.loadURL(url.format({
-                pathname: path.join(__dirname, 'dataPage.html'),
-                protocol:'file:',
-                slashes: true
-            }));
+            for(let i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none"
+            }
+            dataPage.style.display = "block"
+            ipc.send('getTable')
         }
 
         item.classList.add('clicked-nav');

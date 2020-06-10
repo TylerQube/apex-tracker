@@ -19,7 +19,12 @@ body {
     background-image: url("../images/form_background.jpg");
     font-size:120%;
     font-family: 'agencyfbbold';
+    color:white;
     text-align: center;
+}
+
+h1, h2, h3, h4, h5 {
+    margin:0;
 }
 
 .menu-bar {
@@ -123,13 +128,26 @@ body {
     color: white;
 }
 
-form {
+.page-container {
     font-size:175%;
     color:white;
-    border-color: lightgray;
+    background-color: rgba(54, 54, 54, 0.8);
+    border: 2px solid lightgray;
     width:600px;
-    margin: 0 auto;
-    padding:10px;
+    margin: 10px auto 0px auto; 
+    padding:0px;
+}
+
+.page-contents {
+    margin:10px;
+}
+
+#data-page {
+    width: 90%;
+}
+
+fieldset {
+    border: 0;
 }
 
 .apex-button {
@@ -159,11 +177,6 @@ form {
     display:inline-block;
 }
 
-fieldset { 
-    background-color: rgba(54, 54, 54, 0.8);
-    padding-bottom:0;
-}
-
 #minutes-input {
     width:45px;
     margin-right:5px;
@@ -182,6 +195,10 @@ input[type=text], input[type=number] {
     position:relative;
     bottom:3px;
     transition-duration:0.2s;
+}
+
+input[type=button] {
+    text-align:center;
 }
 
 input[type=radio] {
@@ -310,6 +327,13 @@ input[type=radio]:checked + label #loba {
     background-color:#00acad;
 }
 
+#legend-container {
+    transition-duration:0.3s;
+    padding-left:30px;
+    padding-right:30px;
+    margin-bottom:15px;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
@@ -351,3 +375,34 @@ legend {
     margin-top:10px;
     display:inline-block;
 }
+
+table {
+    border-collapse: collapse;
+    margin: 20px auto 0px auto;
+    position:relative;
+    width:100%;
+    color:white;
+}
+
+tr {
+    background-color:rgb(48, 39, 39);
+}
+
+tr:first-child:hover {
+    outline: 0px;
+}
+
+tr:hover {
+    outline: 1px solid orange;
+}
+
+tr:nth-child(even) {
+    background-color:rgb(88, 88, 88);
+}
+
+td, th {
+    width:auto;
+    font-size:80%;
+    padding:2px 2px 2px 2px;
+}
+

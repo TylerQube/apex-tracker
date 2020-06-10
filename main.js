@@ -1,8 +1,10 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-
 const {app, BrowserWindow, Menu, ipcMain} = electron;
+
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('matchstats.db');
 
 let mainWindow;
 let addWindow;
@@ -12,7 +14,7 @@ app.on('ready', function() {
     // Create new window
     mainWindow = new BrowserWindow({
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
         },
         width:600,
         height:1600,
@@ -54,6 +56,36 @@ ipcMain.on('minimize', function(e) {
 ipcMain.on('close', function(e){
     mainWindow.close()
 });
+
+function dateFormat(dateStr) {
+    console.log(dateStr)
+    const months = ["Jan", "Feb", "Mar", "Apr", "June", "July", "Aug", "Sept", "Oct", "Dec"]
+    var year = dateStr.substring(0, 4)
+    var month = parseInt(dateStr.substring(6, 8))
+    var day = dateStr.substring(9)
+
+    return months[month-1] + " " + day
+}
+
+//return SQL query
+ipcMain.on('getTable', function(e) {
+    let sql = 'SELECT * FROM match_stats'
+    var data = []
+    db.serialize(function() {
+        db.all(sql, [], (err, rows) => {
+            if(err) {
+                throw err
+            }
+            rows.forEach((row) => {
+                data.push([row.MatchID, row.Date, row.Legend, row.Season, row.FinalPlace, row.Kills, row.Damage, row.TimeSurvived, row.Revives])
+            })
+            console.log(data)
+            console.log('returning')
+            e.sender.send('getTable-reply', data)
+        })
+
+    })
+})
 
 // Create menu template
 const mainMenuTemplate = [

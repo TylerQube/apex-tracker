@@ -1,3 +1,4 @@
+const electron = require('electron')
 const { dialog } = require('electron').remote;
 const {ipcRenderer} = electron;
 
@@ -30,6 +31,7 @@ submitButton.addEventListener('click', function(event) {
     }
     if(!legendPicked) {
         incomplete = true;
+        document.getElementById('legend-container').style.outline = invalidOutline;
         console.log("no legend selected");
     }
     //check season
@@ -134,11 +136,13 @@ submitButton.addEventListener('click', function(event) {
     
 });
 
+//reset form outlines
 function resetForm() {
     document.getElementById('apex-form-header').reset();
     const inputs = document.getElementsByTagName('input');
     document.getElementById('json-display').style.fontSize = "80%";
     document.getElementById('json-display').innerHTML = "Form Reset!";
+    document.getElementById('legend-container').style.outline = "0px";
     for(let i = 0; i < inputs.length; i++) {
         if(inputs[i].type == "text" || inputs[i].type == "number") {
             inputs[i].style.outlineWidth = "0px";

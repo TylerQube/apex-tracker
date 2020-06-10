@@ -16,149 +16,159 @@
                 <div id="nav-close" class="nav-menu"><img class="icon20x20" src="images/icon_exit.png"></div>
             </div>
         </div>
+
         <div class="nav-bar">
             <button class="nav-button clicked-nav" id="nav-form"><p>FORM</p></button>
             <button class="nav-button unclicked-nav" id="nav-data"><p>DATA</p></button>
             <button class="nav-button unclicked-nav" id="nav-stats"><p>STATS</p></button>
         </div>
         
-        
-        <form class="apex-form" id="apex-form-header">
-            <fieldset>
-                <div>
-                    <legend>MATCH DATA</legend>
-                    <label>LEGEND PLAYED</label>
-                    <br/>
-                        <div class="centerDiv teko-font">
-                            <div class="grid-container">
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="bloodhound" value="bloodhound" required>
-                                    <label for="bloodhound"> 
-                                        <div class='styled-radio' id="bloodhound"></div>
-                                    </label>
-                                </div>
+        <div id="form-page" class="page-container">
+            <div class="page-contents"></div>
+                <form id="apex-form-header">
+                            <h2>MATCH DATA</h2>
+                            <label>LEGEND PLAYED</label>
+                            <br/>
+                            <!-- LEGEND RADIO BUTTONS -->
+                            <div class="centerDiv teko-font" id="legend-container">
+                                    <div class="grid-container" >
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="bloodhound" value="bloodhound" required>
+                                            <label for="bloodhound"> 
+                                                <div class='styled-radio' id="bloodhound"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="gibraltar" value="gibraltar">
-                                    <label for="gibraltar"> 
-                                        <div class="styled-radio" id="gibraltar"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="gibraltar" value="gibraltar">
+                                            <label for="gibraltar"> 
+                                                <div class="styled-radio" id="gibraltar"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="lifeline" value="lifeline">
-                                    <label for="lifeline"> 
-                                        <div class="styled-radio" id="lifeline"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="lifeline" value="lifeline">
+                                            <label for="lifeline"> 
+                                                <div class="styled-radio" id="lifeline"></div>
+                                            </label>
+                                        </div>
 
-                                <!-- SECOND ROW -->
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="pathfinder" value="pathfinder">
-                                    <label for="pathfinder"> 
-                                        <div class="styled-radio" id="pathfinder"></div>
-                                    </label>
-                                </div>
+                                        <!-- SECOND ROW -->
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="pathfinder" value="pathfinder">
+                                            <label for="pathfinder"> 
+                                                <div class="styled-radio" id="pathfinder"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-container"></div>
+                                        <div class="grid-container"></div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="wraith" value="wraith">
-                                    <label for="wraith"> 
-                                        <div class="styled-radio" id="wraith"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="wraith" value="wraith">
+                                            <label for="wraith"> 
+                                                <div class="styled-radio" id="wraith"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="bangalore" value="bangalore">
-                                    <label for="bangalore"> 
-                                        <div class="styled-radio" id="bangalore"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="bangalore" value="bangalore">
+                                            <label for="bangalore"> 
+                                                <div class="styled-radio" id="bangalore"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="caustic" value="caustic">
-                                    <label for="caustic"> 
-                                        <div class="styled-radio" id="caustic"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="caustic" value="caustic">
+                                            <label for="caustic"> 
+                                                <div class="styled-radio" id="caustic"></div>
+                                            </label>
+                                        </div>
 
-                                <!-- THIRD ROW -->
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="mirage" value="mirage">
-                                    <label for="mirage"> 
-                                        <div class="styled-radio" id="mirage"></div>
-                                    </label>
-                                </div>
+                                        <!-- THIRD ROW -->
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="mirage" value="mirage">
+                                            <label for="mirage"> 
+                                                <div class="styled-radio" id="mirage"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="octane" value="octane">
-                                    <label for="octane"> 
-                                        <div class="styled-radio" id="octane"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="octane" value="octane">
+                                            <label for="octane"> 
+                                                <div class="styled-radio" id="octane"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-container"></div>
+                                        <div class="grid-container"></div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form"  type="radio" name="legend" id="wattson" value="wattson">
-                                    <label for="wattson"> 
-                                        <div class="styled-radio" id="wattson"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form"  type="radio" name="legend" id="wattson" value="wattson">
+                                            <label for="wattson"> 
+                                                <div class="styled-radio" id="wattson"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="crypto" value="crypto">
-                                    <label for="crypto"> 
-                                        <div class="styled-radio" id="crypto"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="crypto" value="crypto">
+                                            <label for="crypto"> 
+                                                <div class="styled-radio" id="crypto"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="revenant" value="revenant">
-                                    <label for="revenant"> 
-                                        <div class="styled-radio" id="revenant"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="revenant" value="revenant">
+                                            <label for="revenant"> 
+                                                <div class="styled-radio" id="revenant"></div>
+                                            </label>
+                                        </div>
 
-                                <div class="grid-item">
-                                    <input class="apex-form" type="radio" name="legend" id="loba" value="loba">
-                                    <label for="loba"> 
-                                        <div class="styled-radio" id="loba"></div>
-                                    </label>
-                                </div>
+                                        <div class="grid-item">
+                                            <input class="apex-form" type="radio" name="legend" id="loba" value="loba">
+                                            <label for="loba"> 
+                                                <div class="styled-radio" id="loba"></div>
+                                            </label>
+                                        </div>
+                                    </div>
                             </div>
+                        <br/>
+                        <label>SEASON:</label>
+                        <input class="apex-form" type='number' value="5" id='season-input' min="5" max="5" required><br/>
+
+                        <label>FINAL PLACE:</label>
+                        <input class="apex-form" type='number' id="place-input" min="1" max="60" required><br/>
+
+                        <label>KILLS:</label>
+                        <input class="apex-form" type='number' id="kills-input" min="0" max="60" required><br/>
+
+                        <label>DAMAGE INFLICTED:</label>
+                        <input class="apex-form" type='number' id="damage-input" min="0" required><br/>
+
+                        <label>TIME SURVIVED:</label>
+                            <input class="apex-form" type='number' placeholder="MM" id="minutes-input" min="0" max="59" required>
+                            <input class="apex-form" type='number' placeholder="SS" id="seconds-input" min="0" max="59" required><br/>
+
+                        <label>REVIVES GIVEN:</label>
+                        <input class="apex-form" type='number' id="revives-input" min="0" required><br/>
+                        
+                        <div class="centerDiv">
+                            <input type="submit" id="submit-button" class="apex-form apex-button teko-font"" value="SUBMIT" id="submit"></input>
+                            <input type="button" class="apex-button teko-font" onclick="resetForm()" value="RESET" id="reset-button"></input>
                         </div>
-                    </div>
-                <br/>
-                <label>SEASON:</label>
-                <input class="apex-form" type='number' value="5" id='season-input' min="5" max="5" required><br/>
 
-                <label>FINAL PLACE:</label>
-                <input class="apex-form" type='number' id="place-input" min="1" max="60" required><br/>
+                        <p id="message" class="teko-font"></p>
+                        <p id="json-display"></p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
 
-                <label>KILLS:</label>
-                <input class="apex-form" type='number' id="kills-input" min="0" max="60" required><br/>
-
-                <label>DAMAGE INFLICTED:</label>
-                <input class="apex-form" type='number' id="damage-input" min="0" required><br/>
-
-                <label>TIME SURVIVED:</label>
-                    <input class="apex-form" type='number' placeholder="MM" id="minutes-input" min="0" max="59" required>
-                    <input class="apex-form" type='number' placeholder="SS" id="seconds-input" min="0" max="59" required><br/>
-
-                <label>REVIVES GIVEN:</label>
-                <input class="apex-form" type='number' id="revives-input" min="0" required><br/>
-                
-                <div class="centerDiv">
-                    <input type="submit" id="submit-button" class="apex-form apex-button teko-font"" value="SUBMIT" id="submit"></input>
-                    <input type="button" class="apex-button teko-font" onclick="resetForm()" value="RESET" id="reset-button"></input>
-                </div>
-
-                <p id="message" class="teko-font"></p>
-                <p id="json-display"></p>
-            </fieldset>
-        </form>
+        <div id="data-page" class="page-container">
+            <div class="page-contents">
+                <h2>PLAYER DATA</h3>
+                    <!-- <input type="button" class="apex-button teko-font" value="TABLE" id="get-table"></input> -->
+                    <p id="data-display"></p>
+            </div>
+        </div>
         
     <script src="formHandling.js"></script>
     <script src="dbManage.js"></script>

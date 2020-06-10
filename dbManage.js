@@ -29,16 +29,63 @@ function addRow(formData) {
 }
 
 function getTable() {
-    console.log("start logging");
     let sql = 'SELECT * FROM match_stats'
-    db.all(sql, [], (err, rows) => {
-        if(err) {
-            throw err;
-        }
-
-        rows.forEach((row) => {
-            console.log(row);
-        });
-    });
-    console.log("done logging.")
+    let data = ""
+    db.serialize(function() {
+        db.all(sql, [], (err, rows) => {
+            if(err) {
+                throw err
+            }
+            rows.forEach((row) => {
+                data = data.concat(Object.values(row).toString())
+            })
+        })
+    })
 }
+
+if(document.getElementById('get-table') != null) {
+    document.getElementById('get-table').addEventListener('click', function (e) {
+        console.log('fetching data...')
+        ipc.send('getTable')
+        
+    })
+}
+
+
+function createTable(tableData) {
+    var table = document.createElement('table')
+    var headerList = ["Match", "Date", "Legend", "Season", "Place", "Kills", "Damage", "Time Survived", "Revives"]
+    var headerRow = document.createElement('tr')
+    for(let i = 0; i < headerList.length; i++) {
+        var headerCell = document.createElement('th')
+        headerCell.appendChild(document.createTextNode(headerList[i]))
+        headerRow.appendChild(headerCell)
+    }
+    table.appendChild(headerRow)
+
+    
+    tableData.forEach(function (rowData) {
+        var row = document.createElement('tr')
+        rowData.forEach(function (cellData) {
+            var cell = document.createElement('td')
+            cell.appendChild(document.createTextNode(cellData))
+            row.appendChild(cell)
+        })
+
+        table.appendChild(row)
+    })
+    return table
+}
+
+ipcRenderer.on('getTable-reply', function (e, d) {
+    console.table(d)
+    if(document.getElementById('player-data') != null) {
+        document.getElementById('player-data').parentElement.removeChild(document.getElementById('player-data'))
+    }
+    var table = createTable(d)
+    
+    table.id = "player-data"
+    
+    document.getElementById('data-display').parentNode.insertBefore(table, document.getElementById('data-display'))
+    
+})
