@@ -3,6 +3,7 @@ const remote = electron.remote
 var win = remote.BrowserWindow.getFocusedWindow()
 const url = require('url');
 const path = require('path');
+const { createBrotliDecompress } = require('zlib');
 
 const menuMin = document.getElementById('nav-min')
 
@@ -29,11 +30,13 @@ document.querySelectorAll('.nav-button').forEach(item => {
             }
             formPage.style.display = "block"
         } else if(item.id == 'nav-data') {
+            //Open data page
             for(let i = 0; i < pages.length; i++) {
                 pages[i].style.display = "none"
             }
             dataPage.style.display = "block"
-            ipc.send('sqlQuery', 'SELECT * FROM match_stats')
+            console.log("creating db")
+            sortByOptions()
         }
 
         item.classList.add('clicked-nav');

@@ -28,14 +28,6 @@ function addRow(formData) {
     });
 }
 
-if(document.getElementById('get-table') != null) {
-    document.getElementById('get-table').addEventListener('click', function (e) {
-        console.log('fetching data...')
-        ipc.send('sqlQuery', 'SELECT * FROM match_stats')
-        
-    })
-}
-
 ipcRenderer.on('sqlQuery-reply', function (e, rows) {
     if(document.getElementById('player-data') != null) {
         document.getElementById('player-data').parentElement.removeChild(document.getElementById('player-data'))
@@ -46,7 +38,6 @@ ipcRenderer.on('sqlQuery-reply', function (e, rows) {
         for(let i = 0; i < rows.length; i++) {
             row = rows[i]
             let rowList = [row.Date, row.Legend, row.Season, row.FinalPlace, row.Kills, row.Damage, row.TimeSurvived, row.Revives]
-            console.log(rowList)
             dataList.push(rowList)
         }
         var table = createTable(dataList)

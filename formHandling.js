@@ -127,7 +127,6 @@ submitButton.addEventListener('click', function(event) {
             "time-survived":timeSurvived,
             "revives-given":Number(revivesGiven)
         }
-        document.getElementById('json-display').innerHTML = JSON.stringify(formData);
         createDB();
         addRow(formData);
         getTable();
