@@ -68,20 +68,18 @@ function dateFormat(dateStr) {
 }
 
 //return SQL query
-ipcMain.on('getTable', function(e) {
-    let sql = 'SELECT * FROM match_stats'
-    var data = []
+ipcMain.on('sqlQuery', (e, sql) => {
+    console.log(sql)
     db.serialize(function() {
         db.all(sql, [], (err, rows) => {
             if(err) {
                 throw err
             }
-            rows.forEach((row) => {
+            /* rows.forEach((row) => {
                 data.push([row.MatchID, row.Date, row.Legend, row.Season, row.FinalPlace, row.Kills, row.Damage, row.TimeSurvived, row.Revives])
-            })
-            console.log(data)
-            console.log('returning')
-            e.sender.send('getTable-reply', data)
+            }) */
+            console.log('returning query')
+            e.sender.send('sqlQuery-reply', rows)
         })
 
     })

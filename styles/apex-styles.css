@@ -142,10 +142,6 @@ h1, h2, h3, h4, h5 {
     margin:10px;
 }
 
-#data-page {
-    width: 90%;
-}
-
 fieldset {
     border: 0;
 }
@@ -376,11 +372,46 @@ legend {
     display:inline-block;
 }
 
+#data-page {
+    max-width:1000px;
+    width: 90%;
+}
+
+#filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 40px 0 40px;
+}
+
+.apex-select {
+    font-family: 'teko-light';
+    color:white;
+    text-align:center;
+    font-size:100%;
+    padding-left:10px;
+    width:200px;
+    height:45px;
+    transition:0.1s;
+    border:1px solid white;
+    box-shadow: inset 0px -10px 30px -20px rgba(230, 112, 2, 0.966);
+    background-image:url('../images/arrow_background.png');
+    background-position:center 35%;
+}
+
+option {
+    background-color: rgb(85, 85, 85);
+}
+
+.apex-select:hover, .apex-select:active {
+    border: 1px solid rgba(230, 112, 2, 0.966);
+}
+
 table {
+    /* max-width:980px; */
+    font-family: 'teko-light';
     border-collapse: collapse;
     margin: 20px auto 0px auto;
     position:relative;
-    width:100%;
     color:white;
 }
 
@@ -400,9 +431,14 @@ tr:nth-child(even) {
     background-color:rgb(88, 88, 88);
 }
 
-td, th {
-    width:auto;
-    font-size:80%;
-    padding:2px 2px 2px 2px;
+td {
+    text-align:center;
+    margin-left:5px;
+    margin-right:5px;
+}
+
+th {
+    text-align:center;
+    padding: 7px 10px 7px 10px;
 }
 

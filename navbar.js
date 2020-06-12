@@ -33,7 +33,7 @@ document.querySelectorAll('.nav-button').forEach(item => {
                 pages[i].style.display = "none"
             }
             dataPage.style.display = "block"
-            ipc.send('getTable')
+            ipc.send('sqlQuery', 'SELECT * FROM match_stats')
         }
 
         item.classList.add('clicked-nav');

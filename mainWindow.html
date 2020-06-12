@@ -33,21 +33,21 @@
                             <div class="centerDiv teko-font" id="legend-container">
                                     <div class="grid-container" >
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="bloodhound" value="bloodhound" required>
+                                            <input class="apex-form" type="radio" name="legend" id="bloodhound" value="Bloodhound" required>
                                             <label for="bloodhound"> 
                                                 <div class='styled-radio' id="bloodhound"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="gibraltar" value="gibraltar">
+                                            <input class="apex-form" type="radio" name="legend" id="gibraltar" value="Gibraltar">
                                             <label for="gibraltar"> 
                                                 <div class="styled-radio" id="gibraltar"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="lifeline" value="lifeline">
+                                            <input class="apex-form" type="radio" name="legend" id="lifeline" value="Lifeline">
                                             <label for="lifeline"> 
                                                 <div class="styled-radio" id="lifeline"></div>
                                             </label>
@@ -55,7 +55,7 @@
 
                                         <!-- SECOND ROW -->
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="pathfinder" value="pathfinder">
+                                            <input class="apex-form" type="radio" name="legend" id="pathfinder" value="Pathfinder">
                                             <label for="pathfinder"> 
                                                 <div class="styled-radio" id="pathfinder"></div>
                                             </label>
@@ -64,21 +64,21 @@
                                         <div class="grid-container"></div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="wraith" value="wraith">
+                                            <input class="apex-form" type="radio" name="legend" id="wraith" value="Wraith">
                                             <label for="wraith"> 
                                                 <div class="styled-radio" id="wraith"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="bangalore" value="bangalore">
+                                            <input class="apex-form" type="radio" name="legend" id="bangalore" value="Bangalore">
                                             <label for="bangalore"> 
                                                 <div class="styled-radio" id="bangalore"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="caustic" value="caustic">
+                                            <input class="apex-form" type="radio" name="legend" id="caustic" value="Caustic">
                                             <label for="caustic"> 
                                                 <div class="styled-radio" id="caustic"></div>
                                             </label>
@@ -86,14 +86,14 @@
 
                                         <!-- THIRD ROW -->
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="mirage" value="mirage">
+                                            <input class="apex-form" type="radio" name="legend" id="mirage" value="Mirage">
                                             <label for="mirage"> 
                                                 <div class="styled-radio" id="mirage"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="octane" value="octane">
+                                            <input class="apex-form" type="radio" name="legend" id="octane" value="Octane">
                                             <label for="octane"> 
                                                 <div class="styled-radio" id="octane"></div>
                                             </label>
@@ -102,28 +102,28 @@
                                         <div class="grid-container"></div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form"  type="radio" name="legend" id="wattson" value="wattson">
+                                            <input class="apex-form"  type="radio" name="legend" id="wattson" value="Wattson">
                                             <label for="wattson"> 
                                                 <div class="styled-radio" id="wattson"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="crypto" value="crypto">
+                                            <input class="apex-form" type="radio" name="legend" id="crypto" value="Crypto">
                                             <label for="crypto"> 
                                                 <div class="styled-radio" id="crypto"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="revenant" value="revenant">
+                                            <input class="apex-form" type="radio" name="legend" id="revenant" value="Revenant">
                                             <label for="revenant"> 
                                                 <div class="styled-radio" id="revenant"></div>
                                             </label>
                                         </div>
 
                                         <div class="grid-item">
-                                            <input class="apex-form" type="radio" name="legend" id="loba" value="loba">
+                                            <input class="apex-form" type="radio" name="legend" id="loba" value="Loba">
                                             <label for="loba"> 
                                                 <div class="styled-radio" id="loba"></div>
                                             </label>
@@ -132,7 +132,7 @@
                             </div>
                         <br/>
                         <label>SEASON:</label>
-                        <input class="apex-form" type='number' value="5" id='season-input' min="5" max="5" required><br/>
+                        <input class="apex-form" type='number' value="5" id='season-input' min="4" max="5" required><br/>
 
                         <label>FINAL PLACE:</label>
                         <input class="apex-form" type='number' id="place-input" min="1" max="60" required><br/>
@@ -165,8 +165,30 @@
         <div id="data-page" class="page-container">
             <div class="page-contents">
                 <h2>PLAYER DATA</h3>
-                    <!-- <input type="button" class="apex-button teko-font" value="TABLE" id="get-table"></input> -->
-                    <p id="data-display"></p>
+                <div>
+                    <div id="filter-container">
+                        <select name="sort-by" class="apex-select" id="sort-by" onchange="sortByOptions()">
+                            <option value="Date">Date</option>
+                            <option value="Kills">Kills</option>
+                            <option value="Legend">Legend</option>
+                            <option value="FinalPlace">Final Place</option>
+                            <option value="Damage">Damage</option>
+                            <option value="TimeSurvived">Time Survived</option>
+                            <option value="Revives">Revives</option>
+                        </select>
+                        <select name="asc-select" class="apex-select" id="asc-select" onchange="sortByOptions()">
+                            <option value="DESC">High to Low</option>
+                            <option value="ASC">Low to High</option>
+                        </select>
+                        <select name="sort-season" class="apex-select" id="sort-season" onchange="sortByOptions()">
+                            <option value="All">All Seasons</option>
+                            <option value="5">Season 5</option>
+                            <option value="4">Season 4</option>
+                        </select>
+                    </div>
+                    
+                    <div id="data-display"></div>
+                </div>
             </div>
         </div>
         
