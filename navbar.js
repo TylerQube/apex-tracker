@@ -1,18 +1,13 @@
-const ipc = electron.ipcRenderer
-const remote = electron.remote
-var win = remote.BrowserWindow.getFocusedWindow()
-const url = require('url');
-const path = require('path');
-const { createBrotliDecompress } = require('zlib');
-
 const menuMin = document.getElementById('nav-min')
 
 const dataPage = document.getElementById('data-page')
 const formPage = document.getElementById('form-page')
+const statsPage = document.getElementById('stats-page')
 
 dataPage.style.display = "none"
+statsPage.style.display = "none"
 
-const pages = [formPage, dataPage]
+const pages = [formPage, dataPage, statsPage]
 
 //handles navigation bar highlighting
 document.querySelectorAll('.nav-button').forEach(item => {
@@ -35,8 +30,14 @@ document.querySelectorAll('.nav-button').forEach(item => {
                 pages[i].style.display = "none"
             }
             dataPage.style.display = "block"
+            createDB()
             console.log("creating db")
             sortByOptions()
+        } else if(item.id == 'nav-stats') {
+            for(let i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none"
+            }
+            statsPage.style.display = "block"
         }
 
         item.classList.add('clicked-nav');
@@ -48,45 +49,4 @@ document.querySelectorAll('.nav-button').forEach(item => {
 });
 
 
-//ipcRenderer events to control window
-document.getElementById('nav-min').addEventListener('click', e => {
-    e.preventDefault()
-    ipc.send('minimize')
-})
 
-// Update maximize icon
-const maxImg = document.getElementById('max-img')
-
-//Update based on manual maximization
-function checkMax() {
-    if(win.isMaximized()) {
-        maxImg.src = "images/icon_normalscreen.png"
-    } else {
-        maxImg.src = "images/icon_fullscreen.png"
-    }
-}
-//call check function when page is opened
-checkMax()
-//call check function when window is moved
-win.on('move', function (e) {
-    checkMax()
-})
-
-
-document.getElementById('nav-max').addEventListener('click', e => {
-    e.preventDefault()
-    console.log(maxImg.src)
-    if(maxImg.getAttribute("src") == "images/icon_fullscreen.png") {
-        maxImg.src = "images/icon_normalscreen.png"
-    } else {
-        maxImg.src = "images/icon_fullscreen.png"
-        console.log("what")
-    }
-    ipc.send('toggleMax')
-    console.log("clicked")
-})
-
-document.getElementById('nav-close').addEventListener('click', e => {
-    e.preventDefault()
-    ipc.send('close')
-})

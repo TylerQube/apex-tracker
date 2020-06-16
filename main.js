@@ -1,7 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const {app, BrowserWindow, Menu, ipcMain} = electron;
+const {app, BrowserWindow, Menu, ipcMain, webContents} = electron;
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('matchstats.db');
@@ -16,7 +16,7 @@ app.on('ready', function() {
         webPreferences: {
             nodeIntegration: true,
         },
-        width:600,
+        width:1000,
         height:1600,
         minWidth:600,
         frame: false,
@@ -39,23 +39,31 @@ app.on('ready', function() {
     Menu.setApplicationMenu(mainMenu);
 });
 
+ipcMain.on('matchOverview', (e, matchInfo) => {
+    matchWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true,
+        },
+        width:800,
+        height:400,
+        minWidth:600,
+        frame: false,
+        icon: __dirname + '/images/app_icon_64.png',
+    });
 
-// Use window buttons
-ipcMain.on('toggleMax', function(e){
-    if(!mainWindow.isMaximized()) {
-        mainWindow.maximize()
-    } else {
-        mainWindow.unmaximize()
-    }
-});
+    matchWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'matchSummary.html'),
+        protocol:'file:',
+        slashes: true
+    }));
 
-ipcMain.on('minimize', function(e) {
-    mainWindow.minimize()
+    matchWindow.webContents.on('did-finish-load', () => {
+        console.log("sending")
+        console.log(matchInfo)
+        matchWindow.webContents.send('match-overview', matchInfo)
+    })
+    
 })
-
-ipcMain.on('close', function(e){
-    mainWindow.close()
-});
 
 function dateFormat(dateStr) {
     console.log(dateStr)
@@ -69,17 +77,28 @@ function dateFormat(dateStr) {
 
 //return SQL query
 ipcMain.on('sqlQuery', (e, sql) => {
-    console.log(sql)
     db.serialize(function() {
+        console.log("Receiving query: " + sql)
         db.all(sql, [], (err, rows) => {
             if(err) {
                 throw err
             }
-            /* rows.forEach((row) => {
-                data.push([row.MatchID, row.Date, row.Legend, row.Season, row.FinalPlace, row.Kills, row.Damage, row.TimeSurvived, row.Revives])
-            }) */
-            console.log('returning query')
+            console.log('returning results')
             e.sender.send('sqlQuery-reply', rows)
+        })
+
+    })
+})
+
+ipcMain.on('getRow', (e, sql) => {
+    db.serialize(function() {
+        console.log("Receiving query: " + sql)
+        db.all(sql, [], (err, row) => {
+            if(err) {
+                throw err
+            }
+            console.log('returning row')
+            e.sender.send('sqlRow', row)
         })
 
     })

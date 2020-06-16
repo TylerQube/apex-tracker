@@ -1,6 +1,6 @@
-const electron = require('electron')
-const { dialog } = require('electron').remote;
-const {ipcRenderer} = electron;
+var electron = require('electron')
+var { dialog } = require('electron').remote;
+var {ipcRenderer} = electron;
 
 ipcRenderer.on('item:add', function(e, item){
     const li = document.createElement('li');
@@ -21,6 +21,7 @@ submitButton.addEventListener('click', function(event) {
     const invalidOutline = "4px solid rgba(255, 0, 0, 0.7)";
     //iterate through radio buttons to find selected
     const legendRadios = document.getElementsByName('legend');
+    document.getElementById('legend-container').style.outline = "0";
     let legendPicked = false;
     let legend;
     for(let i = 0; i < legendRadios.length; i++) {
@@ -34,8 +35,42 @@ submitButton.addEventListener('click', function(event) {
         document.getElementById('legend-container').style.outline = invalidOutline;
         console.log("no legend selected");
     }
+
+    const mapRadios = document.getElementsByName("map")
+    document.getElementById('map-container').style.outline = "0";
+    let mapPicked = false
+    let map
+    for(let i = 0; i < mapRadios.length; i++) {
+        if(mapRadios[i].checked) {
+            mapPicked = true
+            map = mapRadios[i].value
+        }
+    }
+    if(!mapPicked) {
+        incomplete = true
+        document.getElementById('map-container').style.outline = invalidOutline;
+        console.log("no map selected")
+    }
+
+    const modeRadios = document.getElementsByName("mode")
+    document.getElementById('mode-container').style.outline = "0";
+    let modePicked = false
+    let mode
+    for(let i = 0; i < modeRadios.length; i++) {
+        if(modeRadios[i].checked) {
+            modePicked = true
+            mode = modeRadios[i].value
+        }
+    }
+    if(!modePicked) {
+        incomplete = true
+        document.getElementById('mode-container').style.outline = invalidOutline;
+        console.log("no mode selected")
+    }
+
     //check season
     const seasonInput = document.getElementById("season-input");
+    seasonInput.style.outline = "0";
     let season;
     if(seasonInput.checkValidity()) {
         season = seasonInput.value;
@@ -46,6 +81,7 @@ submitButton.addEventListener('click', function(event) {
     }
     //check final place
     const placeInput = document.getElementById("place-input");
+    placeInput.style.outline = "0";
     let place;
     if(placeInput.checkValidity()) {
         place = placeInput.value;
@@ -56,6 +92,7 @@ submitButton.addEventListener('click', function(event) {
     }
     //check kills
     const killsInput = document.getElementById("kills-input");
+    killsInput.style.outline = "0";
     let kills;
     if(killsInput.checkValidity()) {
         kills = killsInput.value;
@@ -66,6 +103,7 @@ submitButton.addEventListener('click', function(event) {
     }
     //check damage 
     const damageInput = document.getElementById("damage-input");
+    damageInput.style.outline = "0";
     let damage;
     if(damageInput.checkValidity()) {
         damage = damageInput.value;
@@ -77,7 +115,9 @@ submitButton.addEventListener('click', function(event) {
 
     //check time survived
     const minInput = document.getElementById("minutes-input");
+    minInput.style.outline = "0";
     const secInput = document.getElementById("seconds-input");
+    secInput.style.outline = "0";
     let timeSurvived;
     if(minInput.checkValidity() && secInput.checkValidity()) {
         let minSurvived = minInput.value;
@@ -95,13 +135,14 @@ submitButton.addEventListener('click', function(event) {
         console.log("minutes invalid");
         minInput.style.outline = invalidOutline;
     } 
-    if(!minInput.checkValidity()) {
+    if(!secInput.checkValidity()) {
         incomplete = true;
         console.log("seconds invalid");
         secInput.style.outline = invalidOutline;
     }
     //check revives given
     const revivesInput = document.getElementById("revives-input");
+    revivesInput.style.outline = "0";
     let revivesGiven;
     if(revivesInput.checkValidity()) {
         revivesGiven = revivesInput.value;
@@ -119,6 +160,8 @@ submitButton.addEventListener('click', function(event) {
         console.log("form submitting...");
         //create json to be submitted
         let formData = {
+            "map":map,
+            "mode":mode,
             "legend":legend,
             "season":Number(season),
             "final-place":Number(place),
@@ -129,7 +172,6 @@ submitButton.addEventListener('click', function(event) {
         }
         createDB();
         addRow(formData);
-        getTable();
         resetForm();   
     }
     
@@ -139,8 +181,6 @@ submitButton.addEventListener('click', function(event) {
 function resetForm() {
     document.getElementById('apex-form-header').reset();
     const inputs = document.getElementsByTagName('input');
-    document.getElementById('json-display').style.fontSize = "80%";
-    document.getElementById('json-display').innerHTML = "Form Reset!";
     document.getElementById('legend-container').style.outline = "0px";
     for(let i = 0; i < inputs.length; i++) {
         if(inputs[i].type == "text" || inputs[i].type == "number") {

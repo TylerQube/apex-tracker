@@ -32,18 +32,28 @@ h1, h2, h3, h4, h5 {
     font-family: 'teko-light';
     -webkit-app-region:drag;
     display:flex;
+    width:100%;
+    position:fixed;
+    top:0;
     justify-content:space-between;
     align-items: center;
     height:35px;
     padding:0;
     margin:0;
     background-color:rgb(34, 34, 34);
+    z-index:1;
 }
 
 .flex-bar {
     display:flex;
     justify-content: left;
     align-items: center;
+}
+
+.flex-center {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;;
 }
 
 .nav-menu {
@@ -83,7 +93,7 @@ h1, h2, h3, h4, h5 {
     display:flex;
     justify-content: center;
     height:70px;
-    margin-top:4px;
+    margin-top:60px;
 }
 
 .nav-bar>* {
@@ -123,7 +133,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .clicked-nav {
-    background-color: rgba(255, 38, 0, 0.7);
+    background-color: rgb(255, 38, 0, 0.7);
     border-color: white;
     color: white;
 }
@@ -131,11 +141,12 @@ h1, h2, h3, h4, h5 {
 .page-container {
     font-size:175%;
     color:white;
-    background-color: rgba(54, 54, 54, 0.8);
+    background-color: rgba(54, 54, 54, 0.9);
     border: 2px solid lightgray;
     width:600px;
     margin: 10px auto 0px auto; 
     padding:0px;
+    overflow:auto;
 }
 
 .page-contents {
@@ -152,6 +163,7 @@ fieldset {
     width:200px;
     height:75px;
     margin:auto;
+    margin-bottom:20px;
     padding:8px 60px;
     transition:0.3s;
     background-color: rgba(0, 0, 0, 0);
@@ -197,10 +209,9 @@ input[type=button] {
     text-align:center;
 }
 
-input[type=radio] {
+.grid-container input[type=radio] {
     position:absolute;
     width:100px;
-    height:1px;
     cursor: pointer;
     visibility:hidden;
 }
@@ -213,10 +224,99 @@ input[type=radio] {
     height:102px;
     background-color:#edf0ff;
     transition: 0.1s;
+    cursor: pointer;
 }
 
 .styled-radio:hover {
     background-color:#00acad;
+}
+
+
+.square-radio {
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    text-align: center;
+    height:80px;
+    outline:4px solid white;
+    margin: 10px 5px 10px 5px;
+}
+
+#mode-container {
+    margin: 10px 0 10px 0;
+}
+
+.mode-radio {
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    text-align: center;
+    height:60px;
+    width:80px;
+    outline:4px solid white;
+    margin: 10px 5px 10px 5px;
+    padding: 0 0 0 0;
+    transition-duration: 0.3s;
+}
+
+.mode-radio:hover {
+    background-color: #00acad;
+}
+
+input:checked + label {
+    background-color:#00acad;
+}
+
+
+input[type=radio] {
+    cursor: pointer;
+    display:none;
+}
+
+.dark-overlay {
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0 10px 0 10px;
+    transition-duration: 0.1s;
+}
+
+label[for=kings] {
+    cursor: pointer;
+    background-image: url("../images/kings_canyon.jpg");
+    background-size:100%;
+    transition-duration: 0.1s;
+}
+
+#kings:checked ~ label[for=kings] div {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+label:hover > div {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#kings:checked ~ label[for=kings] {
+    outline: 4px solid #00acad;
+}
+
+label[for=worlds] {
+    cursor: pointer;
+    background-image: url("../images/worlds_edge.jpg");
+    background-size:110%;
+    transition-duration: 0.5s;
+}
+
+#worlds:checked ~ label[for=worlds] div {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#worlds:checked ~ label[for=worlds] {
+    outline: 4px solid #00acad;
 }
 
 #bloodhound {
@@ -354,6 +454,7 @@ input[type=radio]:checked + label #loba {
 .grid-item:hover {
     transform: skew(-20deg) scale(1.2);
 }
+
 label {
     margin-top:15px;
     font-size:80%;
@@ -411,7 +512,6 @@ table {
     font-family: 'teko-light';
     border-collapse: collapse;
     margin: 20px auto 0px auto;
-    position:relative;
     color:white;
 }
 
@@ -435,10 +535,17 @@ td {
     text-align:center;
     margin-left:5px;
     margin-right:5px;
+    white-space: nowrap;
+    padding-right:5px;
+    padding-left:5px;
 }
 
 th {
     text-align:center;
     padding: 7px 10px 7px 10px;
+}
+
+th:hover, th:active {
+    background-color:rgb(59, 48, 48);
 }
 
