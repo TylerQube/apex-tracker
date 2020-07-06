@@ -44,9 +44,9 @@ ipcMain.on('matchOverview', (e, matchInfo) => {
         webPreferences: {
             nodeIntegration: true,
         },
-        width:800,
-        height:400,
-        minWidth:600,
+        width:700,
+        height:550,
+        minWidth:700,
         frame: false,
         icon: __dirname + '/images/app_icon_64.png',
     });

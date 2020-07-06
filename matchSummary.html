@@ -2,14 +2,36 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="./styles/apex-styles.css">
-        <title>Apex Stat Tracker</title>
+        <title>Match Summary</title>
+        <style>
+            div {
+                margin: 0 10px 0 10px;
+            }
+
+            table {
+                font-size: 60%;
+                border-collapse:separate;
+                border-spacing: 5px 5px;
+            }
+
+            td, th {
+                border:2px solid rgb(194, 42, 42);
+                background-color:rgb(54, 54, 54);
+                padding:8px;
+            }
+
+            .center {
+                text-align:center;
+            }
+
+        </style>
     </head>
-    <body style="text-align: left;;">
+    <body style="text-align: left; font-family: Arial, Helvetica, sans-serif;">
         <div class="menu-bar">
             <div class="flex-bar">
                 <div class="div-icon"><img class="icon30" src="images/app_icon_64.png"></div>
             </div>
-            <div>Match Summary</div>
+            <div id="window-header">Match Summary</div>
             <div style="-webkit-app-region:no-drag">
                 <div id="nav-min" class="nav-menu"><img class="icon20x20" src="images/icon_minimize.png"></div>
                 <div id="nav-max" class="nav-menu"><img id="max-img"class="icon20x20" src="images/icon_fullscreen.png"></div>
@@ -19,15 +41,45 @@
 
         <br/>
         <br/>
-        <br/>
-
-        <div id="form-page" class="page-container">
-            <div class="page-contents" style="display:flex; align-items: space-around;">
-                <div style="width: 40%; height: 60%;">
-                    <img src="images/full_legends/crypto.jpg" style="width: 90%; height:100%;" id="legend-pic">
+        
+        <div id="container" class="page-container" style="background-color: none;">
+            <div class="page-contents" style="display:flex; align-items: space-evenly;;">
+                <div style=" height: 400px;margin:10px; border:none; position:relative;">
+                    <h1 id="legend-name" style="position:absolute; bottom:0; left:0; font-family:'agencyfbbold';"></h1>
+                    <img style="height:100%;" id="legend-pic">
                 </div>
-                <div>
-                    <h5 id="stats-container"></h5>
+                <div id="table-container">
+                    <table id="match-table">
+                        <tr>
+                            <th id="date-header" colspan="2" style="white-space: nowrap;"></th>
+                        </tr>
+                        <tr>
+                            <th id="season-header" colspan="2" class="center"></th>
+                        </tr>
+                        <tr>
+                            <td id="map" class="center" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td id="mode" class="center" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>Final Place: </td>
+                            <td id="final-place" class="center"></td>
+                        </tr>
+                        <tr>
+                            <td>Kills: </td>
+                            <td id="kills" class="center"></td>
+                        </tr>
+                        <tr>
+                            <td>Damage: </td>
+                            <td id="damage" class="center"></td>
+                        </tr>
+                        <tr>
+                            <td>Revives: </td>
+                            <td id="revives" class="center"></td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
         </div>

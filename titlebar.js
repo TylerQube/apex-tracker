@@ -12,8 +12,14 @@ document.getElementById('nav-min').addEventListener('click', e => {
     win.minimize()
 })
 
-// Update maximize icon
 const maxImg = document.getElementById('max-img')
+
+// Update maximize icon
+if(win.isMaximized()) {
+    maxImg.src = "images/icon_normalscreen.png"
+} else {
+    maxImg.src = "images/icon_fullscreen.png"
+}
 //call check function when window is moved
 win.on('maximize', function (e) {
     maxImg.src = "images/icon_normalscreen.png"

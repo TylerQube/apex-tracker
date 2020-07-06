@@ -56,6 +56,7 @@ ipcRenderer.on('sqlQuery-reply', function (e, rows) {
         table.appendChild(header)
     }
     table.id = "player-data"
+    table.classList.add("data-table")
     document.getElementById('data-display').appendChild(table)
 
     var headerRow = document.getElementById('player-data').rows[0]
