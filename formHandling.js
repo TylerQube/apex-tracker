@@ -182,6 +182,8 @@ function resetForm() {
     document.getElementById('apex-form-header').reset();
     const inputs = document.getElementsByTagName('input');
     document.getElementById('legend-container').style.outline = "0px";
+    document.getElementById('mode-container').style.outline = "0px";
+    document.getElementById('map-container').style.outline = "0px";
     for(let i = 0; i < inputs.length; i++) {
         if(inputs[i].type == "text" || inputs[i].type == "number") {
             inputs[i].style.outlineWidth = "0px";
