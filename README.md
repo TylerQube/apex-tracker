@@ -1,10 +1,7 @@
-Apex Legends User Stat Tracker using Electron
+Disclaimer: Fan project to learn electron and SQL, legend portraits and other visual assets are not my own
 
-IMPLEMENTED:
-Front-end HTML Form
+## Apex Legends Stat Tracker - Unofficial Fan Project
+- Desktop, local-only stat logger app built with electron, sqlite, and html/css
+- Built as an early learning project, very out-of-date and not maintained
 
-TO-DO:
-Form submission handling
-database submission
-database data analysis
-Graph creation
+<img src="[https://imgur.com/a/FPUHys0](https://i.imgur.com/OFPy87n.png)">
