@@ -4,4 +4,4 @@ Disclaimer: Fan project to learn electron and SQL, legend portraits and other vi
 - Desktop, local-only stat logger app built with electron, sqlite, and html/css
 - Built as an early learning project, very out-of-date and not maintained
 
-<img src="[https://imgur.com/a/FPUHys0](https://i.imgur.com/OFPy87n.png)">
+<img src="https://i.imgur.com/OFPy87n.png" width="700">
